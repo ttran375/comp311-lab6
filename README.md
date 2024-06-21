@@ -1,5 +1,7 @@
 # COMP311: Unit Testing with JUnit
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ttran375/comp311-lab6)
+
 ## Question 5
 
 5. Create a JUnit test case to verify that the constructor of the `SeatingPlan` class generates the required seating plan by following the steps below.
