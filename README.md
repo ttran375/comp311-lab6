@@ -96,11 +96,9 @@ c. Run the test and verify that it is successful.
 
    ii. The Console view opens and displays the following messages:
 
-       ```
-       Starting test of the SeatingPlan default constructor
-       Seating plan has 14 seats.
-       Test of the SeatingPlan default constructor complete
-       ```
+    Starting test of the SeatingPlan default constructor
+    Seating plan has 14 seats.
+    Test of the SeatingPlan default constructor complete
 
    iii. Verify that the JUnit view shows that the test ran successfully.
 
