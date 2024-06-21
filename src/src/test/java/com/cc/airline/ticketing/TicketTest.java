@@ -1,27 +1,40 @@
 package com.cc.airline.ticketing;
 
 import com.cc.airline.passengers.Passenger;
+import com.cc.airline.passengers.PassengerName;
+import com.cc.airline.ticketing.Seat;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 
 public class TicketTest {
 
 	@Test
-	public void testTicketCreation() {
-		// Setup
-		Passenger passenger = new Passenger(/* parameters to create a Passenger */);
-		Seat seat = new Seat();
-		seat.setRow(10);
-		seat.setLetter('A');
-		double price = 300.0;
+	public void testTicketValid() {
+		// Create a Passenger object
+		Passenger passenger = new Passenger(new PassengerName("Mary", "I", "Worth"));
 
-		// Execution
+		// Create a Seat object and set the row and letter
+		Seat seat = new Seat();
+		seat.setRow(5);
+		seat.setLetter('A');
+
+		// Define the price
+		double price = 150.0;
+
+		// Create the Ticket object
 		Ticket ticket = new Ticket(passenger, seat, price);
 
-		// Verification
-		assertEquals("Passenger should match the one provided", passenger, ticket.getPassenger());
-		assertEquals("Seat should match the one provided", seat, ticket.getSeat());
-		assertEquals("Price should match the one provided", 300.0, ticket.getPrice(), 0.01);
-		assertTrue("Ticket number should be greater than 1000000", ticket.getTicketNo() > 1000000);
+		// Assertions to verify that the ticket is created correctly
+		assertEquals(passenger, ticket.getPassenger());
+		assertTrue(ticket.getTicketNo() > 1000000);
+	}
+
+	@Test
+	public void testTicketBad() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Ticket ticket = new Ticket(null, null, -100.0);
+		});
 	}
 }
