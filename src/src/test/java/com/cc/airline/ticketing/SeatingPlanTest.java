@@ -53,5 +53,4 @@ public class SeatingPlanTest {
 		assertEquals(expectedNumTotalRows, actualNumTotalRows);
 		assertEquals(expectedNumTotalSeats, actualNumTotalSeats);
 	}
-
 }

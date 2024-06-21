@@ -1,5 +1,7 @@
 # COMP311: Unit Testing with JUnit
 
+## Question 5
+
 5.Create a JUnit test case to verify that the constructor of the
 SeatingPlan class generates the required seating plan, by following the steps below.
 
@@ -50,36 +52,66 @@ reference.
 
 Just for this first test, solution code is provided here.
 
-**package** mary.worth.airticket.tests;\
-**import** org.junit.After;\
-**import** org.junit.Assert;\
-**import** org.junit.Before;\
-**import** org.junit.Test;\
-**import** com.cc.airline.ticketing.SeatingPlan;
+```java
+package com.cc.airline.ticketing;
 
-**publicclass** SeatingPlanTest {\
-\@Before\
-**publicvoid** setUp() **throws** Exception {\
-System.*out*.println(\
-\"Starting test of the SeatingPlan default constructor\"); }\
-\@After\
-**publicvoid** tearDown() **throws** Exception {\
-System.*out*.println(\
-\"Test of the SeatingPlan default constructor complete\"); }\
-\@Test\
-**publicvoid** testSeatingPlan() {\
-SeatingPlan sp = **new** SeatingPlan();\
-*assertNotNull*(sp);\
-*assertEquals*(sp.getSeats().size(), 14);\
-*assertNotNull*(sp.getSeatReserver());
+import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class SeatingPlanTest {
+
+ @BeforeClass
+ public static void setUpBeforeClass() throws Exception {
+  System.out.println(
+    "Starting test of the SeatingPlan default constructor:setUpBeforeClass()");
+ }
+
+ @AfterClass
+ public static void tearDownAfterClass() throws Exception {
+  System.out.println(
+    "Starting test of the SeatingPlan default constructor:setUpBeforeClass():tearDownAfterClass()");
+ }
+
+ @Before
+ public void setUp() throws Exception {
+  System.out.println(
+    "Starting test of the SeatingPlan default constructor:setUpBeforeClass():setUp()");
+ }
+
+ @After
+ public void tearDown() throws Exception {
+  System.out.println(
+    "Starting test of the SeatingPlan default constructor:setUpBeforeClass():tearDown()");
+ }
+
+ @Test
+ public void testSeatingPlan() {
+  // fail("Not yet implemented");
+
+  SeatingPlan sp = new SeatingPlan();
+  // assertNotNULL(sp);
+
+  int actualNumBusSeats = sp.getNumBusSeats();
+  int actualNumTotalRows = sp.getTotalRows();
+  int actualNumTotalSeats = sp.getTotalSeats();
+
+  int expectedNumBusSeats = 2;
+  int expectedNumTotalRows = 4;
+  int expectedNumTotalSeats = 14;
+
+  assertEquals(expectedNumBusSeats, actualNumBusSeats);
+  assertEquals(expectedNumTotalRows, actualNumTotalRows);
+  assertEquals(expectedNumTotalSeats, actualNumTotalSeats);
+ }
 }
+```
 
-+-----------------------------------+-----------------------------------+
-| }                                 | > c.Run the test and verify that  |
-|                                   | > it is successful.               |
-+===================================+===================================+
-+-----------------------------------+-----------------------------------+
+c.Run the test and verify that it is successful.
 
 i.In the Package Explorer, right-click the **SeatingPlanTest** class
 and select **RunAs**→**JUnit test**.
@@ -96,41 +128,52 @@ iii.Verify that the JUnit view shows that the test ran successfully.
 
 ![](media/image5.png)
 
-6.Create a second test class called TicketTest to test that a Ticket
+## Question 6
+
+6. Create a second test class called TicketTest to test that a Ticket
 object is constructed correctly when provided reasonable input.
 
 a.Write a test method that calls the following constructor with valid
-arguments: Ticket(Passenger p, Seat s, double price)\
-Before you create the Ticket object:\
-i.Use the wizard to generate the TicketTest class\
+arguments: `Ticket(Passenger p, Seat s, double price)`
+
+Before you create the Ticket object:
+
+i.Use the wizard to generate the TicketTest class
+
 ii.Add a test method to the class.
 
 iii.In the test method, create a Passenger object. The default
 constructor of the Passenger class generates a valid name "T. B. A.",
 so *either* of the following statements instantiate a Passenger:
 
-Passenger passenger = new Passenger(); Or:\
+`Passenger passenger = new Passenger();` Or:
+
+```java
 Passenger passenger = new Passenger(
+    new PassengerName("Mary", "I", "Worth"));
+```
 
-new PassengerName("Mary", "I", "Worth"));
-
-iv\. Create a Seat object.
+iv. Create a Seat object.
 
 The Seat class has no explicit constructor so you must use the
-implicit default constructor and then call seat.setRow(int i) and\
-seat.setLetter(char c) to specify a specific seat.
+implicit default constructor and then call `seat.setRow(int i)` and
+`seat.setLetter(char c)` to specify a specific seat.
 
 v.Create the ticket object, providing the passenger object, seat
 object and the price as a number as the three arguments of the
 constructor.
 
-Ticket ticket = **new** Ticket(**passenger**, seat, price);
+```java
+Ticket ticket = new Ticket(passenger, seat, price);
+```
 
 b.For a condition that verifies that a ticket is issued, use the fact
 that tickets are numbered, starting at 1,000,000. So lines in the test
 method could look like:
 
-*assertTrue*(ticket.getTicketNo() \> 1000000 );
+```java
+assertTrue(ticket.getTicketNo() > 1000000 );
+```
 
 c.Write a second test in the same class that generates a ticket when
 called with arguments that are not valid. In real life, you should
