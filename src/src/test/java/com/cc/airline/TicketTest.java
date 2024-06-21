@@ -1,8 +1,10 @@
-package com.cc.airline.ticketing;
+package com.cc.airline;
 
 import com.cc.airline.passengers.Passenger;
 import com.cc.airline.passengers.PassengerName;
 import com.cc.airline.ticketing.Seat;
+import com.cc.airline.ticketing.Ticket;
+
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

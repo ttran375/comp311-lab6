@@ -1,8 +1,12 @@
-package com.cc.airline.ticketing;
+package com.cc.airline;
 
 import com.cc.airline.passengers.Passenger;
 import com.cc.airline.passengers.PassengerName;
 import com.cc.airline.passengers.StaffPassenger;
+import com.cc.airline.ticketing.Seat;
+import com.cc.airline.ticketing.SeatingClass;
+import com.cc.airline.ticketing.Ticket;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
