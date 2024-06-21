@@ -243,35 +243,3 @@ d. To correct errors, use the **Source** → **Organize Imports** feature of the
 e. Run the test suite class as a JUnit test. Review the results of this test suite and the seven test cases it contains.
 
 At this point, the tests required for this assignment are complete. Your test suite as a whole should fail because at least one test failed. In other words, the testing exercise was productive because it found defects.
-
-## Question 9
-
-9. Export your package of test classes to a JAR: As you follow this step, refer to the image on the next page.
-
-a. In the package explorer, right-click on package **your.name.airticket.tests** and select **Export**.
-
-b. Under **Java**, select to export a **JAR** file. Click **Next**.
-
-c. In the "Select the resources to export" area, expand the project **AirTicketPrototypeTesting** and make sure only your test package is selected (marked with a green square).
-
-   ![](media/image6.png)
-
-d. Make sure the box **Export Java source files and resources** is checked. No other boxes below the list of exportable resources should be checked.
-
-   ![](media/image7.png)
-
-e. In the JAR file entry area, enter the full path to where you want to put the jar on your local file system. Call the file ***YourName*JUnit.jar**. Click **Finish**.
-
-## Question 10
-
-10. **Optional:** To make sure that you have exported the source, create another Java project and import your jar into it, following the same steps as importing the startup code. Make sure you can see the source code for your classes.
-
-## Question 11
-
-11. Hand in your test code:
-
-a. Demonstrate the test suite running to the instructor. Be prepared to explain the resulting view.
-
-b. Upload the exported JAR to the dropbox on eCentennial.
-
-**End of exercise**
