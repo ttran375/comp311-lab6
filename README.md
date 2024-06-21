@@ -1,6 +1,317 @@
 # COMP311: Unit Testing with JUnit
 
-## Question 5
+5.Create a JUnit test case to verify that the constructor of the
+SeatingPlan class generates the required seating plan, by following the steps below.
 
-Create a `JUnit` test case to verify that the constructor of the `SeatingPlan` class
-generates the required seating plan, by following the steps below.
+For this assignment, put all test classes into one package and
+include your name in the package name. For example,
+**mary.worth.airticket.tests**.
+
+a.Right-click on the **AirTicketPrototypeTesting** project, select
+**New**→**JUnit** **Test Case**.
+
+i.Be sure to select the **New JUnit 4 test** radio button.
+
+ii.Enter the package name ***your.name*.airticket.tests**.
+
+iii.Enter the class name **SeatingPlanTest**.
+
+iv.Check the boxes to create stubs for **setUp()** and **tearDown().**
+v.Specify that the class under test is **SeatingPlanTest**.
+
+vi.Click **Next**.
+
+![](media/image4.png)
+
+vii.When you see a list of test methods, select to generate tasks for
+the constructor **SeatingPlan()** only. Click **Finish**.
+
+viii.A dialog asks if you want to add Junit 4 to the project build
+path. Click **OK**. Because JUnit is built into Eclipse this is all
+the setup required to build and run test cases.
+
+b\. The tool generates a skeleton test class with annotated methods
+for you.
+
+Complete the methods:\
+i.Insert code into the setUp() method to write the message "Starting
+test of the SeatingPlan default constructor" to the console.
+
+ii.Insert code into the tearDown() method to write the message "Test
+of the SeatingPlan default constructor complete" to the console.
+
+iii.Modify the to the testSeatingPlan() method to create an instance
+of SeatingPlan and verify that the new object is constructed as
+expected. Consider how to express the test using methods of the\
+org.junit.Assert class. For example, the SeatingPlan instance must not
+be null. Its getSeats() method should return an Array List of size 14,
+and its getSeatReserver() method should return a non-null object
+reference.
+
+Just for this first test, solution code is provided here.
+
+**package** mary.worth.airticket.tests;\
+**import** org.junit.After;\
+**import** org.junit.Assert;\
+**import** org.junit.Before;\
+**import** org.junit.Test;\
+**import** com.cc.airline.ticketing.SeatingPlan;
+
+**publicclass** SeatingPlanTest {\
+\@Before\
+**publicvoid** setUp() **throws** Exception {\
+System.*out*.println(\
+\"Starting test of the SeatingPlan default constructor\"); }\
+\@After\
+**publicvoid** tearDown() **throws** Exception {\
+System.*out*.println(\
+\"Test of the SeatingPlan default constructor complete\"); }\
+\@Test\
+**publicvoid** testSeatingPlan() {\
+SeatingPlan sp = **new** SeatingPlan();\
+*assertNotNull*(sp);\
+*assertEquals*(sp.getSeats().size(), 14);\
+*assertNotNull*(sp.getSeatReserver());
+
+}
+
++-----------------------------------+-----------------------------------+
+| }                                 | > c.Run the test and verify that  |
+|                                   | > it is successful.               |
++===================================+===================================+
++-----------------------------------+-----------------------------------+
+
+i.In the Package Explorer, right-click the **SeatingPlanTest** class
+and select **RunAs**→**JUnit test**.
+
+ii.The Console view opens and displays the following messages:
+
+Starting test of the SeatingPlan default constructor
+
+Seating plan has 14 seats.
+
+Test of the SeatingPlan default constructor complete
+
+iii.Verify that the JUnit view shows that the test ran successfully.
+
+![](media/image5.png)
+
+6.Create a second test class called TicketTest to test that a Ticket
+object is constructed correctly when provided reasonable input.
+
+a.Write a test method that calls the following constructor with valid
+arguments: Ticket(Passenger p, Seat s, double price)\
+Before you create the Ticket object:\
+i.Use the wizard to generate the TicketTest class\
+ii.Add a test method to the class.
+
+iii.In the test method, create a Passenger object. The default
+constructor of the Passenger class generates a valid name "T. B. A.",
+so *either* of the following statements instantiate a Passenger:
+
+Passenger passenger = new Passenger(); Or:\
+Passenger passenger = new Passenger(
+
+new PassengerName("Mary", "I", "Worth"));
+
+iv\. Create a Seat object.
+
+The Seat class has no explicit constructor so you must use the
+implicit default constructor and then call seat.setRow(int i) and\
+seat.setLetter(char c) to specify a specific seat.
+
+v.Create the ticket object, providing the passenger object, seat
+object and the price as a number as the three arguments of the
+constructor.
+
+Ticket ticket = **new** Ticket(**passenger**, seat, price);
+
+b.For a condition that verifies that a ticket is issued, use the fact
+that tickets are numbered, starting at 1,000,000. So lines in the test
+method could look like:
+
+*assertTrue*(ticket.getTicketNo() \> 1000000 );
+
+c.Write a second test in the same class that generates a ticket when
+called with arguments that are not valid. In real life, you should
+create several tests to isolate different combinations of valid and
+invalid input values, but for purposes of this exercise combine
+several tests, as in:
+
+\@Test
+
+public void testTicketBad() {
+
+*assertThrows*(IllegalArgumentException.**class**, ()-\>{
+
++-----------------------------------+-----------------------------------+
+| }                                 | > Ticket [ticket]{.underline} =   |
+|                                   | > **new** Ticket(**null**,        |
+|                                   | > **null**, -100.0);} );          |
++===================================+===================================+
++-----------------------------------+-----------------------------------+
+
+d.Run the test class as a JUnit test and take note of the results.
+
+*Hint: The test fails because the second test method does not throw an
+exception*
+
+*where clearly one should be thrown. This defect should be reported.
+It would*
+
+*helpful for the test report suggest more tests that give better
+coverage invalid*
+
+*input.*
+
+7.You want a test class to test the logic of selling a ticket. Review
+the SeatReserver. sellTicket() method and note that it contains a
+mixture of user interface code and business logic. Your test manager
+decides that it is appropriate to postpone testing class SeatReserver
+until the actual user interface is ready. However, risk analysis
+indicates that ensuring that the price of a ticket is calculated
+correctly is very important. Create a new test class:
+
+a.Create a new JUnit test case as before:\
+i.Name the new class **SellTicketTest**.
+
+ii.Ask for method stubs for **setUpBeforeClass()** and
+**tearDownAfterClass()**.
+
+iii.Leave the box **Class under test** empty and click **Finish**.
+
+b.When the skeleton class is generated, add bodies to the\
+setUpBeforeClass() and tearDownAfterClass() methods to print messages
+to the console as you did for the previous setUp() and tearDown()
+
+methods.
+
+If necessary, search on Google or refer to JUnit documentation to
+recall the difference between JUnit annotations \@Before and
+\@BeforeClass and between \@After and \@AfterClass.
+
+Create a sellTicket1 test method as shown below. The logic of the code
+is similar to the SeatReserver.sellTicket() method but this test
+replaces user input with specific values:
+
+\@Test
+
+public void sellTicket1() {
+
+SeatingClass sClass = SeatingClass.ECONOMY;
+
+Passenger passenger = new Passenger(
+
+new PassengerName(\"Mary\", \"I\", \"Worth\"));
+
+Seat seat = new Seat();
+
+seat.setRow(3); seat.setLetter(\'D\');
+
+double price = sClass.getPrice();
+
+Ticket ticket = new Ticket(passenger, seat, price);
+
+System.out.println(\"Ticket issued: \" + ticket);
+
+assertEquals(ticket.getPrice(), 500.0, 0.005 );
+
+}
+
+c.Add a similar method sellTicket2 to test the case of a selling a
+ticket to an airline employee who expects to pay half price, \$250,
+for an economy class ticket.
+
+For example, instantiate the passenger with:
+
+PassengerName pName = new PassengerName(\"Mary\", \"I\", \"Worth\");
+
+StaffPassenger passenger = new StaffPassenger(pName, \"EMP123\");
+
+d.Add a method sellTicket3 to see what happens when a StaffPassenger
+tries to buy a business class ticket and expects to pay full fare.
+Specify business class using an instance of Seating class created with
+the line:
+
+SeatingClass sClass = SeatingClass.BUSINESS;
+
+e.Run all three test cases in the SellTicketTest class. Does a\
+StaffPassenger get the employee discount for economy class and is he
+or she correctly charged the full price for business class? Analyze
+the test results and test code to try to deduce what class and method
+has a problem calculating ticket prices for StaffPassengers.
+
+8.Create a test suite that combines all the tests and run the test
+suite.
+
+a.Close the JUnit view and all open editor windows.
+
+b.Create a new Java class called **AirTicketTestSuite** in the
+**your.name.airticket.tests** package.
+
+**Note:** you can always create a JUnit test class or suite as though
+it was an ordinary Java class. For test cases, using the JUnit tools
+in Eclipse save you time by generating method stubs, import
+statements, and annotation for you. The tools also detect whether the
+JUnit jars are on the classpath (called project build path in Eclipse)
+and can add them to the classpath for you.
+
+c.Before the class declaration, add the annotations:
+
+\@RunWith(Suite.class)
+
+\@SuiteClasses({SeatingPlanTest.class,
+
+TicketTest.class,
+
+SellTicketTest.class})
+
+d.To correct errors use the **Source** → **Organize Imports** feature
+of the editor.
+
+e.Run the test suite class as a JUnit test. Review the results of this
+test suite and the seven test cases it contains.
+
+At this point the tests required for this assignment are complete.
+Your test suite as a whole should fail because at least one test
+failed. In other words, the testing exercise was productive because it
+found defects.
+
+9.Export your package of test classes to a JAR: As you follow this
+step, refer to the image on the next page.
+
+a.In the package explorer, right-click on package
+**your.name.airticket.tests** and select **Export**.
+
+b.Under **Java**, select to export a **JAR** file. Click **Next**.
+
+c.In the Select the resources to export area, expand the project\
+**AirTicketPrototypeTesting** and make sure only your test package is
+selected (marked with a green square).
+
+![](media/image6.png)
+
+d.Make sure the box **Export Java source
+files and resources** is checked. No other boxes below the list of
+exportable resources should be checked.
+
+![](media/image7.png){width="5.781943350831146in"
+height="5.7090179352580925in"}![](media/image8.png){width="6.430555555555555in"
+height="5.722222222222222in"}
+
+e.In the JAR file entry area, enter the full path to where you want to
+put the jar on your local file system. Call the file
+***YourName*JUnit.jar**. Click **Finish**.
+
+10.**Optional:** to make sure that you have exported source, create
+another Java project and import your jar into to, following the same
+steps as importing the startup code. Make sure you can see the source
+code for your classes.
+
+11\. Hand in your test code:\
+a.Demonstrate the test suite running to the instructor. Be prepared to
+explain the resulting results view.
+
+b.Upload the exported JAR to the dropbox on eCentennial.
+
+**End of exercise**
